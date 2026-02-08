@@ -1,0 +1,35 @@
+[book]
+title = "Protibuild"
+authors = ["Alexander Cooper"]
+language = "en"
+description = "Protibuild, an open source app to simulate proteins in an environment and to build new proteins."
+src = "src"
+
+[build]
+build-dir = "book"
+
+[output.html]
+default-theme = "ayu"
+preferred-dark-theme = "ayu"
+mathjax-support = false
+
+[output.html.fold]
+enable = true
+level = 0
+
+[output.html.print]
+enable = true
+
+[output.html.search]
+enable = true
+limit-results = 30
+teaser-word-count = 30
+use-boolean-and = true
+boost-title = 2
+boost-hierarchy = 1
+boost-paragraph = 1
+expand = true
+heading-split-level = 3
+
+[rust]
+edition = "2024"
