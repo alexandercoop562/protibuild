@@ -1,4 +1,4 @@
-# Protibuild a protein simulator and builder
+# Protibuild, a protein simulator and builder
 
 This is an open source app to simulate proteins in an environment and to build new proteins.
 

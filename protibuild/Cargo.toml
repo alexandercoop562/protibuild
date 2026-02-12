@@ -6,4 +6,5 @@ license = "GPL-3.0-or-later"
 
 [dependencies]
 bevy = { version = "0.18", features = ["dynamic_linking"] }
+rapier3d = { version = "0.32", features = ["simd-stable"] }
 log = { version = "*", features = ["max_level_debug", "release_max_level_warn"] }

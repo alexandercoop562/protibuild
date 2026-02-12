@@ -9,8 +9,8 @@ src = "src"
 build-dir = "book"
 
 [output.html]
-default-theme = "ayu"
-preferred-dark-theme = "ayu"
+default-theme = "rust"
+preferred-dark-theme = "coal"
 mathjax-support = false
 
 [output.html.fold]

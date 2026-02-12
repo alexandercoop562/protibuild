@@ -29,7 +29,10 @@ jobs:
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
       - name: Install mdBook
-        run: cargo install mdbook
+        run: |
+          if ! command -v mdbook &> /dev/null; then
+            cargo install mdbook
+          fi
 
       - name: Build mdBook
         run: mdbook build docs
