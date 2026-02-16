@@ -86,7 +86,6 @@ impl Interaction {
 
     pub(crate) fn handle_input(
         mut cursor_options_query: Query<&mut CursorOptions>,
-        mouse_button: Res<ButtonInput<MouseButton>>,
         keyboard: Res<ButtonInput<KeyCode>>,
         mut controller_query: Query<&mut CameraController>,
     ) {
@@ -97,12 +96,14 @@ impl Interaction {
             return;
         };
 
-        if mouse_button.just_pressed(MouseButton::Left) && !controller.is_captured {
+        // Press 'C' to capture/lock cursor to camera
+        if keyboard.just_pressed(KeyCode::KeyC) && !controller.is_captured {
             cursor_options.grab_mode = CursorGrabMode::Locked;
             cursor_options.visible = false;
             controller.is_captured = true;
         }
 
+        // Press 'Escape' to release cursor
         if keyboard.just_pressed(KeyCode::Escape) && controller.is_captured {
             cursor_options.grab_mode = CursorGrabMode::None;
             cursor_options.visible = true;

@@ -28,15 +28,17 @@ pub(crate) struct CameraTransformData {
     pub transform: Transform,
 }
 
-pub(crate) struct Camera;
+pub struct CameraPlugin;
 
-impl Camera {
-    pub(crate) fn init(app: &mut App) {
+impl Plugin for CameraPlugin {
+    fn build(&self, app: &mut App) {
         app.add_systems(Startup, Self::setup)
             .add_systems(Update, Self::update);
     }
+}
 
-    pub(crate) fn setup(mut commands: Commands) {
+impl CameraPlugin {
+    fn setup(mut commands: Commands) {
         commands.insert_resource(CameraTransformData {
             transform: Transform::from_xyz(-2.5, 4.5, 9.0).looking_at(Vec3::ZERO, Vec3::Y),
         });
@@ -48,7 +50,7 @@ impl Camera {
         ));
     }
 
-    pub(crate) fn update(
+    fn update(
         camera_query: Query<&Transform, With<CameraController>>,
         mut camera_data: ResMut<CameraTransformData>,
     ) {

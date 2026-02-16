@@ -2,7 +2,7 @@ use bevy::prelude::*;
 
 use crate::user::camera::CameraTransformData;
 
-pub(crate) struct Grid;
+pub struct GridPlugin;
 
 #[derive(Component)]
 pub(crate) struct GridLine;
@@ -17,13 +17,15 @@ pub(crate) struct GridConfig {
     grid_center: Vec3,
 }
 
-impl Grid {
-    pub(crate) fn init(app: &mut App) {
-        app.add_systems(Startup, Grid::setup)
-            .add_systems(Update, Grid::update);
+impl Plugin for GridPlugin {
+    fn build(&self, app: &mut App) {
+        app.add_systems(Startup, Self::setup)
+            .add_systems(Update, Self::update);
     }
+}
 
-    pub(crate) fn setup(
+impl GridPlugin {
+    fn setup(
         mut commands: Commands,
         mut meshes: ResMut<Assets<Mesh>>,
         mut materials: ResMut<Assets<StandardMaterial>>,
@@ -141,7 +143,7 @@ impl Grid {
         }
     }
 
-    pub(crate) fn update(
+    fn update(
         mut grid_config: ResMut<GridConfig>,
         camera_data: Res<CameraTransformData>,
         mut grid_lines: Query<&mut Transform, (With<GridLine>, Without<AxisRay>)>,
@@ -159,13 +161,14 @@ impl Grid {
             grid_config.grid_center = new_center;
 
             let range = grid_config.range;
+            let mut transforms: Vec<_> = grid_lines.iter_mut().collect();
             let mut index = 0;
 
             for j in -range..=range {
                 for k in -range..=range {
                     for i in -range..=range {
-                        if let Some(mut transform) = grid_lines.iter_mut().nth(index) {
-                            transform.translation = Vec3::new(
+                        if index < transforms.len() {
+                            transforms[index].translation = Vec3::new(
                                 new_center.x + i as f32 * spacing,
                                 new_center.y + j as f32 * spacing,
                                 new_center.z + k as f32 * spacing,
@@ -179,8 +182,8 @@ impl Grid {
             for i in -range..=range {
                 for k in -range..=range {
                     for j in -range..=range {
-                        if let Some(mut transform) = grid_lines.iter_mut().nth(index) {
-                            transform.translation = Vec3::new(
+                        if index < transforms.len() {
+                            transforms[index].translation = Vec3::new(
                                 new_center.x + i as f32 * spacing,
                                 new_center.y + j as f32 * spacing,
                                 new_center.z + k as f32 * spacing,
@@ -194,8 +197,8 @@ impl Grid {
             for i in -range..=range {
                 for j in -range..=range {
                     for k in -range..=range {
-                        if let Some(mut transform) = grid_lines.iter_mut().nth(index) {
-                            transform.translation = Vec3::new(
+                        if index < transforms.len() {
+                            transforms[index].translation = Vec3::new(
                                 new_center.x + i as f32 * spacing,
                                 new_center.y + j as f32 * spacing,
                                 new_center.z + k as f32 * spacing,

@@ -1,2 +1,6 @@
 [Introduction](./Introduction.md)
+[Installation](./Installation.md)
 [Controls](./Controls.md)
+[Interface](./Interface.md)
+[Projects](./Projects.md)
+[Chemistry](./Chemistry.md)

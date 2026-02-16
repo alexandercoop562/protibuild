@@ -5,13 +5,17 @@ use crate::user::camera::CameraController;
 #[derive(Component)]
 pub(crate) struct Crosshair;
 
-impl Crosshair {
-    pub(crate) fn init(app: &mut App) {
+pub struct CrosshairPlugin;
+
+impl Plugin for CrosshairPlugin {
+    fn build(&self, app: &mut App) {
         app.add_systems(Startup, Self::setup)
             .add_systems(Update, Self::update);
     }
+}
 
-    pub(crate) fn setup(mut commands: Commands) {
+impl CrosshairPlugin {
+    fn setup(mut commands: Commands) {
         commands
             .spawn((
                 Node {
@@ -48,7 +52,7 @@ impl Crosshair {
             });
     }
 
-    pub(crate) fn update(
+    fn update(
         controller_query: Query<&CameraController>,
         mut crosshair_query: Query<&mut Node, With<Crosshair>>,
     ) {

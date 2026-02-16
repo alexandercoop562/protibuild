@@ -2,34 +2,41 @@ use bevy::prelude::*;
 
 use crate::user::interaction::Movable;
 
+/// Marker component for entities that should rotate over time.
 #[derive(Component)]
-pub(crate) struct Rotatable;
+pub struct Rotatable;
 
-pub(crate) struct DevCube;
+/// Plugin for the development cube feature.
+pub struct DevCubePlugin;
 
-impl DevCube {
-    pub(crate) fn init(app: &mut App) {
-        app.add_systems(Startup, Self::setup)
-            .add_systems(Update, Self::update);
+impl Plugin for DevCubePlugin {
+    fn build(&self, app: &mut App) {
+        app.add_systems(Update, update_rotatable);
     }
+}
 
-    pub(crate) fn setup(
-        mut commands: Commands,
-        mut meshes: ResMut<Assets<Mesh>>,
-        mut materials: ResMut<Assets<StandardMaterial>>,
-    ) {
-        commands.spawn((
-            Mesh3d(meshes.add(Cuboid::new(1.0, 1.0, 1.0))),
+pub fn spawn_dev_cube(
+    commands: &mut Commands,
+    meshes: &mut ResMut<Assets<Mesh>>,
+    materials: &mut ResMut<Assets<StandardMaterial>>,
+    position: Vec3,
+    _rotation: Quat,
+    scale: Vec3,
+) -> Entity {
+    commands
+        .spawn((
+            Name::new("DevCube"),
+            Mesh3d(meshes.add(Cuboid::new(1.0 * scale.x, 1.0 * scale.y, 1.0 * scale.z))),
             MeshMaterial3d(materials.add(Color::srgb(0.5, 0.5, 0.5))),
-            Transform::from_xyz(0.0, 0.0, 0.0),
+            Transform::from_translation(position),
             Rotatable,
             Movable,
-        ));
-    }
+        ))
+        .id()
+}
 
-    pub(crate) fn update(time: Res<Time>, mut query: Query<&mut Transform, With<Rotatable>>) {
-        for mut transform in &mut query {
-            transform.rotate_y(time.delta_secs() * 1.0);
-        }
+fn update_rotatable(time: Res<Time>, mut query: Query<&mut Transform, With<Rotatable>>) {
+    for mut transform in &mut query {
+        transform.rotate_y(time.delta_secs() * 1.0);
     }
 }

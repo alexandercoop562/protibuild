@@ -4,21 +4,46 @@ Welcome to **Protibuild** - an open-source protein simulator and builder that br
 
 ## What is Protibuild?
 
-Protibuild is a powerful application designed for researchers, students, and enthusiasts to:
+Protibuild is a desktop application designed for researchers, students, and enthusiasts to:
 
-- **Simulate proteins** in realistic environments
-- **Build new protein structures** with intuitive tools
-- **Visualize molecular interactions** in real-time 3D
+- **Visualize proteins** in realistic 3D environments
+- **Explore amino acid structures** with accurate ball-and-stick models
+- **Interact with molecules** by picking up and moving objects in 3D space
+- **Switch between project templates** for different viewing modes
 
-## Why Protibuild?
+## Key Features
 
-Understanding protein structure and behavior is fundamental to modern biology, medicine, and drug discovery. Protibuild makes these complex concepts accessible through:
+### Molecular Visualization
+- **Ball-and-stick model** for accurate molecular representation
+- **CPK coloring** - standard chemical colors for each element
+  - Hydrogen (H): White
+  - Carbon (C): Gray
+  - Nitrogen (N): Blue
+  - Oxygen (O): Red
+  - Sulfur (S): Yellow
 
-- Interactive 3D visualization powered by the [Bevy](https://bevyengine.org/) game engine
-- Real-time simulation capabilities
-- An intuitive interface for building and manipulating molecular structures
+### Supported Molecules
+- **All 20 standard amino acids** with accurate atomic positions and bond connectivity
+- **Dev Cube** - a simple rotating cube for development testing
 
-[Go to the repo](https://github.com/alexandercoop562/protibuild)
+### Interactive Controls
+- First-person camera navigation
+- Pick up and move objects in 3D space
+- Adjust object distance with scroll wheel
+
+## Technology
+
+Protibuild is built with:
+- [Bevy](https://bevyengine.org/) 0.18 - A refreshingly simple data-driven game engine
+- Rust - For performance and safety
+
+## Getting Started
+
+1. **Launch the application** - You'll start in the "Dev Cube" project
+2. **Open the File menu** - Click "File" in the top-left corner
+3. **Select a project** - Choose "Amino Acids" to see all 20 standard amino acids
+4. **Navigate with WASD** - Press **C** to capture your cursor, then use movement keys
+5. **Interact with objects** - Hover over molecules and click to grab them
 
 ## Support the Project
 
@@ -28,3 +53,7 @@ If you find Protibuild useful, consider supporting its development:
 [![GitHub Sponsors](https://img.shields.io/badge/Sponsor-333333?logo=githubsponsors)](https://github.com/sponsors/alexandercoop562)
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/D1D61TSFNH)
+
+---
+
+**Repository**: [https://github.com/alexandercoop562/protibuild](https://github.com/alexandercoop562/protibuild)
